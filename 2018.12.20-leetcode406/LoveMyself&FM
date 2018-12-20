@@ -1,0 +1,24 @@
+class Solution {
+public:
+ bool paixu (pair<int, int> a , pair<int, int> b){
+        if(a.first == b.first ) return a.second < b.second ;
+        return a.first > b.first ;
+    }
+    vector<pair<int, int>> reconstructQueue(vector<pair<int, int>>& people) {
+        sort(people.begin(),people.end(),paixu);
+        });//还是排序，先按照他们的高度从高到低（因为我后面用的从前往后遍历插入，当然也可以从低到高）排序，如果高度一样，那么按照k值从小到大排序。
+/*sort函数的第二种写法：
+ sort(people.begin(),people.end(),[](const pair<int,int> &a,const pair<int,int> &b){//第三个参数是它的方法处理
+            return a.first > b.first || (a.first == b.first && a.second < b.second);
+        });
+*/
+        vector<pair<int, int>> res(people.size());
+        for(int i = 0;i < people.size();i++)
+        {
+            ////此时前面的人一定都比后面的高所以他们的k就是他们应该在的位置
+            res.insert(res.begin()+people[i].second , people[i]);
+        }
+        res.resize(people.size());  //设置大小(size); 
+        return res;
+    }
+};
